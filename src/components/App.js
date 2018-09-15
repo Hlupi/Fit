@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Header, Footer } from './layouts'
-import Exercises from './exercises'
+import { Header, Footer } from './Layouts'
+import Exercises from './Exercises'
 import { muscles, exercises } from '../store.js'
 
 export default class App extends Component {
@@ -23,15 +23,24 @@ export default class App extends Component {
   )
   }
 
-  handleCategorySelected = category => {
+  handleCategorySelect = category => {
     this.setState({
       category
     })
   }
 
-  handleExerciseSelected = id => {
+  handleExerciseSelect = id => {
     this.setState((prevState) => ({
       exercise: prevState.exercises.find(exercise => exercise.id === id)
+    }))
+  }
+
+  handleExerciseCreate = exercise => {
+    this.setState(({ exercises }) => ({
+      exercises: [
+        ...exercises,
+        exercise
+      ]
     }))
   }
 
@@ -41,19 +50,22 @@ export default class App extends Component {
 
     return(
       <Fragment>
-        <Header />
+        <Header
+          muscles={muscles}
+          onExerciseCreate={this.handleExerciseCreate}
+        />
 
         <Exercises
           exercise={exercise}
           category={category}
           exercises={exercises}
-          onSelect={this.handleExerciseSelected}
+          onSelect={this.handleExerciseSelect}
         />
 
         <Footer
           category={category}
           muscles={muscles}
-          onSelect={this.handleCategorySelected}/>
+          onSelect={this.handleCategorySelect}/>
 
       </Fragment>
     )
