@@ -1,10 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './Components/App';
-import registerServiceWorker from './registerServiceWorker';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { red, amber } from '@material-ui/core/colors';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './Components/App'
+import registerServiceWorker from './registerServiceWorker'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { red, amber } from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
   palette: {

@@ -25,8 +25,8 @@ export default class App extends Component {
       exercises[muscles] = [...exercises[muscles], exercise]
 
       return exercises
-    }, initialExercises)
-  )
+      }, initialExercises)
+    )
   }
 
   handleCategorySelect = category =>
@@ -57,6 +57,7 @@ export default class App extends Component {
       editMode: true
     }))
 
+
   handleExerciseEdit = exercise =>
   this.setState(({ exercises }) => ({
     exercises: [
@@ -74,6 +75,7 @@ export default class App extends Component {
       exercise: exercise.id === id ? {} : exercise
     }))
 
+
   getContext = () => ({
     muscles,
     ...this.state,
@@ -88,16 +90,12 @@ export default class App extends Component {
 
 
   render() {
-    // const exercises = this.getExercisesByMuscles()
-    // const { category, editMode, exercise } = this.state
 
     return(
       <Provider value={this.getContext()}>
           <CssBaseline />
           <Header />
-
           <Exercises />
-
           <Footer />
       </Provider>
     )

@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import withWidth from '@material-ui/core/withWidth';
+import React, { Component } from 'react'
+import { AppBar, Tabs, Tab, withWidth } from '@material-ui/core'
 import { withContext }  from '../../context'
+
 
 class Footer extends Component {
 
@@ -12,13 +10,13 @@ class Footer extends Component {
     onCategorySelect(index === 0 ? '' : muscles[index - 1])
   }
 
-
   getIndex = () => {
     const { category, muscles } = this.props
     return category
   ? muscles.findIndex(group => group === category) + 1
   : 0
   }
+
 
   render() {
     const { width, muscles } = this.props
