@@ -1,7 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { Header, Footer } from './Layouts'
 import Exercises from './Exercises'
-import { muscles, exercises } from '../store.js'
+import { muscles, exercises } from '../store'
+import { Provider } from '../context'
+
 
 export default class App extends Component {
   state = {
@@ -65,42 +68,38 @@ export default class App extends Component {
 
 
   handleExerciseDelete = id =>
-    this.setState(({ exercises }) => ({
+    this.setState(({ exercises, exercise, editMode }) => ({
       exercises: exercises.filter(ex => ex.id !== id),
-      editMode: false,
-      exercise: {}
+      editMode: exercise.id === id ? false : editMode,
+      exercise: exercise.id === id ? {} : exercise
     }))
+
+  getContext = () => ({
+    muscles,
+    ...this.state,
+    exercisesByMuscles: this.getExercisesByMuscles(),
+    onCategorySelect: this.handleCategorySelect,
+    onCreate: this.handleExerciseCreate,
+    onEdit: this.handleExerciseEdit,
+    onSelectEdit: this.handleExerciseSelectEdit,
+    onDelete: this.handleExerciseDelete,
+    onSelect: this.handleExerciseSelect
+  })
 
 
   render() {
-    const exercises = this.getExercisesByMuscles()
-    const { category, editMode, exercise } = this.state
+    // const exercises = this.getExercisesByMuscles()
+    // const { category, editMode, exercise } = this.state
 
     return(
-      <Fragment>
-        <Header
-          muscles={muscles}
-          onExerciseCreate={this.handleExerciseCreate}
-        />
+      <Provider value={this.getContext()}>
+          <CssBaseline />
+          <Header />
 
-        <Exercises
-          exercise={exercise}
-          category={category}
-          editMode={editMode}
-          exercises={exercises}
-          muscles={muscles}
-          onSelect={this.handleExerciseSelect}
-          onSelectEdit={this.handleExerciseSelectEdit}
-          onEdit={this.handleExerciseEdit}
-          onDelete={this.handleExerciseDelete}
-        />
+          <Exercises />
 
-        <Footer
-          category={category}
-          muscles={muscles}
-          onSelect={this.handleCategorySelect}/>
-
-      </Fragment>
+          <Footer />
+      </Provider>
     )
   }
 }
