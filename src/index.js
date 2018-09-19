@@ -6,20 +6,25 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { red, amber } from '@material-ui/core/colors'
 
 const theme = createMuiTheme({
+
   palette: {
-    primary: red,
+    primary: {
+      main: red[400],
+      light: red[200],
+      dark: red[600]
+    },
     secondary: {
-      main: amber.A400,
+      main: amber[500],
       light: amber[200],
       dark: amber[700]
     },
-    type: 'dark'
+    type: 'light'
   },
   spacing: {
     unit: 10
   }
 })
-
+console.log(theme);
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <App />

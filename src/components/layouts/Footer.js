@@ -26,7 +26,7 @@ class Footer extends Component {
           value={this.getIndex()}
           onChange={this.onIndexSelect}
           indicatorColor="secondary"
-          textColor="secondary"
+          textColor="inherit"
           centered={width !== 'xs'}
           scrollable={width === 'xs'}
         >
